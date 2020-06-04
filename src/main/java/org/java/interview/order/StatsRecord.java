@@ -22,7 +22,7 @@ public class StatsRecord {
         this.customerId = customerId;
     }
 
-    public BigDecimal getOrderTotalSum() {
+    public BigDecimal getMonthlyTotal() {
         return orderTotalSum;
     }
 
@@ -30,7 +30,7 @@ public class StatsRecord {
         this.orderTotalSum = orderTotalSum;
     }
 
-    public Month getMonthIndex() {
+    public Month getMonth() {
         return month;
     }
 
