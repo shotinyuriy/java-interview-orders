@@ -5,10 +5,10 @@ import java.time.Month;
 
 public class StatsRecord {
     private String customerId;
-    private BigDecimal orderTotalSum;
     private Month month;
+    private BigDecimal orderTotalSum;
 
-    public StatsRecord(String customerId, BigDecimal orderTotalSum, Month month) {
+    public StatsRecord(String customerId, Month month, BigDecimal orderTotalSum) {
         this.customerId = customerId;
         this.orderTotalSum = orderTotalSum;
         this.month = month;
@@ -18,24 +18,12 @@ public class StatsRecord {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public BigDecimal getMonthlyTotal() {
-        return orderTotalSum;
-    }
-
-    public void setOrderTotalSum(BigDecimal orderTotalSum) {
-        this.orderTotalSum = orderTotalSum;
-    }
-
     public Month getMonth() {
         return month;
     }
 
-    public void setMonthIndex(Month month) {
-        this.month = month;
+    public BigDecimal getMonthlyTotal() {
+        return orderTotalSum;
     }
 
     @Override

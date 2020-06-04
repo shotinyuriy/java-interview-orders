@@ -5,8 +5,10 @@ import java.util.List;
 
 public interface LetterStatistics {
     /**
-     * returns the first topSize entries from from the top of the list of the most frequent letters
-     * the key is the capitalized letter, the value is the number of occurrences, non letter characters are ignored.
+     * returns the first topSize number entries (letter -> count) of the most frequent letters in the string list
+     * the key is the capitalized letter, the value is the number of its occurrences in all strings,
+     * non-letter characters are ignored.
+     *
      * for example:
      * Given list: 111111, Pen 1, Pineapple, Apple, Pen 2, 222222
      * topSize: 3
