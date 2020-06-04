@@ -2,11 +2,29 @@ package org.java.interview.letter;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.util.*;
 
+@RunWith(Parameterized.class)
 public class LettersStatisticsTest {
-    LetterStatistics letterStatistics = new LetterStatistics();
+
+    @Parameterized.Parameters(name = "{0}")
+    public static List<Object[]> parameters() {
+        return Arrays.asList(
+                new Object[]{"On stream", new LetterStatisticsOnStream()},
+                new Object[]{"No stream", new LetterStatisticsNoStream()}
+        );
+    }
+
+    private String name;
+    private LetterStatistics letterStatistics;
+
+    public LettersStatisticsTest(String name, LetterStatistics letterStatistics) {
+        this.name = name;
+        this.letterStatistics = letterStatistics;
+    }
 
     @Test
     public void testEmptyList() {
@@ -26,7 +44,7 @@ public class LettersStatisticsTest {
         expected.put('N', 3);
 
         Assert.assertNotNull(top);
-        Assert.assertTrue(top.isEmpty());
+        Assert.assertTrue(!top.isEmpty());
         Assert.assertEquals(expected, top);
     }
 }

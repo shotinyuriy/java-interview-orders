@@ -3,8 +3,7 @@ package org.java.interview.letter;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class LetterStatistics {
-
+public interface LetterStatistics {
     /**
      * returns the first topSize entries from from the top of the list of the most frequent letters
      * the key is the capitalized letter, the value is the number of occurrences, non letter characters are ignored.
@@ -19,8 +18,5 @@ public class LetterStatistics {
      * @param topSize
      * @return
      */
-    public LinkedHashMap<Character, Integer> topFrequentLetters(List<String> strings, int topSize) {
-        // TODO: implement this
-        return new LinkedHashMap<>();
-    }
+    LinkedHashMap<Character, Integer> topFrequentLetters(List<String> strings, int topSize);
 }
