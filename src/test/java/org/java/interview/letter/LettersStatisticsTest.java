@@ -27,5 +27,6 @@ public class LettersStatisticsTest {
 
         Assert.assertNotNull(top);
         Assert.assertTrue(top.isEmpty());
+        Assert.assertEquals(expected, top);
     }
 }
