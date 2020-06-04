@@ -13,7 +13,7 @@ public class LetterStatistics {
      * topSize: 3
      * Returned LinkedHashMap:
      * P -> 7
-     * E -> 4
+     * E -> 5
      * N -> 3
      *
      * @param topSize
