@@ -22,7 +22,7 @@ public class LettersStatisticsTest {
 
         LinkedHashMap<Character, Integer> expected = new LinkedHashMap<>();
         expected.put('P', 7);
-        expected.put('E', 4);
+        expected.put('E', 5);
         expected.put('N', 3);
 
         Assert.assertNotNull(top);
