@@ -21,6 +21,64 @@ public class StatisticsServiceTest {
     private StatisticsService statisticsService = new StatisticsServiceImpl();
 
     @Test
+    public void testTopMonthlyCustomersInYear_OrderFromDifferentYear() {
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order(CUST1, LocalDate.parse("2018-01-01"), BigDecimal.valueOf(30)));
+
+        List<StatsRecord> topMonthlyCustomers = statisticsService.topMonthlyCustomersInYear(orders, 2019, 3);
+
+        Assert.assertNotNull(topMonthlyCustomers);
+        Assert.assertTrue(topMonthlyCustomers.isEmpty());
+    }
+
+    @Test
+    public void testTopMonthlyCustomersInYear_OrderFromThisYear() {
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order(CUST1, LocalDate.parse("2019-01-01"), BigDecimal.valueOf(30)));
+
+        List<StatsRecord> topMonthlyCustomers = statisticsService.topMonthlyCustomersInYear(orders, 2019, 3);
+
+        Assert.assertNotNull(topMonthlyCustomers);
+        Assert.assertEquals(1, topMonthlyCustomers.size());
+    }
+
+    @Test
+    public void testTopMonthlyCustomersInYear_2OrdersFromThisYearDifferentMonths() {
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order(CUST1, LocalDate.parse("2019-01-01"), BigDecimal.valueOf(30)));
+        orders.add(new Order(CUST1, LocalDate.parse("2019-02-01"), BigDecimal.valueOf(40)));
+
+        List<StatsRecord> topMonthlyCustomers = statisticsService.topMonthlyCustomersInYear(orders, 2019, 3);
+
+        Assert.assertNotNull(topMonthlyCustomers);
+        Assert.assertEquals(2, topMonthlyCustomers.size());
+
+        Assert.assertEquals(CUST1, topMonthlyCustomers.get(0).getCustomerId());
+        Assert.assertEquals(Month.FEBRUARY, topMonthlyCustomers.get(0).getMonth());
+        Assert.assertEquals(BigDecimal.valueOf(40), topMonthlyCustomers.get(0).getMonthlyTotal());
+
+        Assert.assertEquals(CUST1, topMonthlyCustomers.get(1).getCustomerId());
+        Assert.assertEquals(Month.JANUARY, topMonthlyCustomers.get(1).getMonth());
+        Assert.assertEquals(BigDecimal.valueOf(30), topMonthlyCustomers.get(1).getMonthlyTotal());
+    }
+
+    @Test
+    public void testTopMonthlyCustomersInYear_2OrdersFromThisYearSameMonth() {
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order(CUST1, LocalDate.parse("2019-02-01"), BigDecimal.valueOf(30)));
+        orders.add(new Order(CUST1, LocalDate.parse("2019-02-21"), BigDecimal.valueOf(40)));
+
+        List<StatsRecord> topMonthlyCustomers = statisticsService.topMonthlyCustomersInYear(orders, 2019, 3);
+
+        Assert.assertNotNull(topMonthlyCustomers);
+        Assert.assertEquals(1, topMonthlyCustomers.size());
+
+        Assert.assertEquals(CUST1, topMonthlyCustomers.get(0).getCustomerId());
+        Assert.assertEquals(Month.FEBRUARY, topMonthlyCustomers.get(0).getMonth());
+        Assert.assertEquals(BigDecimal.valueOf(70), topMonthlyCustomers.get(0).getMonthlyTotal());
+    }
+
+    @Test
     public void testTopMonthlyCustomersInYear_ManyOrders() {
         List<StatsRecord> topMonthlyCustomers = statisticsService.topMonthlyCustomersInYear(findAll(), 2019, 3);
 
