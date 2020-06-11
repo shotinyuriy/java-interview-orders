@@ -3,6 +3,9 @@ package org.java.interview.order;
 import java.time.Month;
 import java.util.Objects;
 
+/**
+ * You can use this class as grouping key for order statistics
+ */
 public class CustomerMonthKey {
     private String customerId;
     private Month month;

@@ -1,11 +1,12 @@
 package org.java.interview.order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This service calculates different statistics for customer orders
+ * Implementation of the StatisticsService without Stream API
  */
-public interface StatisticsService {
+public class NoStreamStatisticsService implements StatisticsService {
 
     /**
      * The method returns list of the customers whos monthly total order sum is the largest
@@ -17,5 +18,9 @@ public interface StatisticsService {
      * @param topSize - number of records to be in the top
      * @return
      */
-    public List<StatsRecord> topMonthlyCustomersInYear(List<Order> orders, int year, int topSize);
+    @Override
+    public List<StatsRecord> topMonthlyCustomersInYear(List<Order> orders, int year, int topSize) {
+        // TODO: implement this
+        return new ArrayList<>();
+    }
 }

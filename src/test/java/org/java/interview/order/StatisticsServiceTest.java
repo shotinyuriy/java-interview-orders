@@ -2,13 +2,18 @@ package org.java.interview.order;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
+@RunWith(Parameterized.class)
 public class StatisticsServiceTest {
 
     private final String CUST1 = "cust-1";
@@ -18,7 +23,19 @@ public class StatisticsServiceTest {
     private final String CUST5 = "cust-5";
     private final String CUST6 = "cust-6";
 
-    private StatisticsService statisticsService = new StatisticsServiceImpl();
+    private final StatisticsService statisticsService;
+
+    @Parameterized.Parameters(name = "{index} - {0}")
+    public static Collection<Object[]> data() {
+        return Arrays.asList(
+                    new Object[] {"On Stream", new StatisticsServiceImpl()},
+                    new Object[] {"No Stream", new NoStreamStatisticsService()}
+                );
+    }
+
+    public StatisticsServiceTest(String testName, StatisticsService statisticsService) {
+        this.statisticsService = statisticsService;
+    }
 
     @Test
     public void testTopMonthlyCustomersInYear_OrderFromDifferentYear() {
@@ -50,16 +67,16 @@ public class StatisticsServiceTest {
 
         List<StatsRecord> topMonthlyCustomers = statisticsService.topMonthlyCustomersInYear(orders, 2019, 3);
 
+
         Assert.assertNotNull(topMonthlyCustomers);
+
+        List<StatsRecord> expected = new ArrayList<>();
+        expected.add(new StatsRecord(CUST1, Month.FEBRUARY, BigDecimal.valueOf(40)));
+        expected.add(new StatsRecord(CUST1, Month.JANUARY, BigDecimal.valueOf(30)));
+
         Assert.assertEquals(2, topMonthlyCustomers.size());
-
-        Assert.assertEquals(CUST1, topMonthlyCustomers.get(0).getCustomerId());
-        Assert.assertEquals(Month.FEBRUARY, topMonthlyCustomers.get(0).getMonth());
-        Assert.assertEquals(BigDecimal.valueOf(40), topMonthlyCustomers.get(0).getMonthlyTotal());
-
-        Assert.assertEquals(CUST1, topMonthlyCustomers.get(1).getCustomerId());
-        Assert.assertEquals(Month.JANUARY, topMonthlyCustomers.get(1).getMonth());
-        Assert.assertEquals(BigDecimal.valueOf(30), topMonthlyCustomers.get(1).getMonthlyTotal());
+        Assert.assertEquals(expected.get(0), topMonthlyCustomers.get(0));
+        Assert.assertEquals(expected.get(1), topMonthlyCustomers.get(1));
     }
 
     @Test
@@ -73,9 +90,10 @@ public class StatisticsServiceTest {
         Assert.assertNotNull(topMonthlyCustomers);
         Assert.assertEquals(1, topMonthlyCustomers.size());
 
-        Assert.assertEquals(CUST1, topMonthlyCustomers.get(0).getCustomerId());
-        Assert.assertEquals(Month.FEBRUARY, topMonthlyCustomers.get(0).getMonth());
-        Assert.assertEquals(BigDecimal.valueOf(70), topMonthlyCustomers.get(0).getMonthlyTotal());
+        List<StatsRecord> expected = new ArrayList<>();
+        expected.add(new StatsRecord(CUST1, Month.FEBRUARY, BigDecimal.valueOf(70)));
+
+        Assert.assertEquals(expected.get(0), topMonthlyCustomers.get(0));
     }
 
     @Test
