@@ -35,7 +35,7 @@ public class LettersStatisticsTest {
 
     @Test
     public void testManyStrings() {
-        List<String> strings = Arrays.asList("11111", "Pen 1", "Pineapple", "Apple", "Pen 2", "22222");
+        List<String> strings = Arrays.asList("11111", null, "Pen 1", "Pineapple", "Apple", "Pen 2", "22222");
         LinkedHashMap<Character, Integer> top = letterStatistics.topFrequentLetters(strings, 3);
 
         LinkedHashMap<Character, Integer> expected = new LinkedHashMap<>();
