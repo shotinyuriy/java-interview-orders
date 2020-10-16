@@ -6,6 +6,9 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.time.Month;
 
+/**
+ * Unit test of the StatsRecord class
+ */
 public class StatsRecordTest {
 
     @Test

@@ -17,7 +17,8 @@ public interface LetterStatistics {
      * E -> 5
      * N -> 3
      *
-     * @param topSize
+     * @param strings - a list of strings to gather letters frequency statistics
+     * @param topSize - an integer representing the size of the top frequent letters top
      * @return
      */
     LinkedHashMap<Character, Integer> topFrequentLetters(List<String> strings, int topSize);

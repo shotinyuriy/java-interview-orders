@@ -18,11 +18,13 @@ public class LetterStatisticsNoStream implements LetterStatistics {
      * E -> 5
      * N -> 3
      *
-     * @param topSize
+     * @param strings - a list of strings to gather letters frequency statistics
+     * @param topSize - an integer representing the size of the top frequent letters top
      * @return
      */
     public LinkedHashMap<Character, Integer> topFrequentLetters(List<String> strings, int topSize) {
         // TODO: implements this
+        // Please do not use any stream API operations only loops as for and while.
         return new LinkedHashMap<>();
     }
 }

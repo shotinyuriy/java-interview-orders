@@ -47,4 +47,19 @@ public class LettersStatisticsTest {
         Assert.assertTrue(!top.isEmpty());
         Assert.assertEquals(expected, top);
     }
+
+    @Test
+    public void testManyStringsComplexCase() {
+        List<String> strings = Arrays.asList("11111", "Pen 1", "Pineapple", "Apple", "Pen 2", "22222", "31 Red Hawk circle, Palo-Alto, CA");
+        LinkedHashMap<Character, Integer> top = letterStatistics.topFrequentLetters(strings, 3);
+
+        LinkedHashMap<Character, Integer> expected = new LinkedHashMap<>();
+        expected.put('P', 7);
+        expected.put('E', 5);
+        expected.put('N', 3);
+
+        Assert.assertNotNull(top);
+        Assert.assertTrue(!top.isEmpty());
+        Assert.assertEquals(expected, top);
+    }
 }
